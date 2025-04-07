@@ -1,0 +1,1 @@
+# Command-line interface view for the application
