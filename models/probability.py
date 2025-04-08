@@ -121,10 +121,44 @@ def calculate_full_probability(dice, rolls_remaining):
 
         return total_probability
 
+def calculate_escalera_probability(dice, rolls_remaining):
+    """
+    Calculate the probability of achieving Escalera (Straight) 
+    based on the current dice and rolls remaining.
+    :param dice: A list of integers representing the outcomes of the dice.
+    :param rolls_remaining: An integer representing the number of rolls left (1 or 2).
+    :return: A float representing the probability of achieving Escalera.
+    """
+    # Identify the gaps in the straight
+    straight_1 = {1, 2, 3, 4, 5}
+    straight_2 = {2, 3, 4, 5, 6}
+    current_dice = set(dice)
 
-def calculate_escalera_probability(dice):
-    # Logic to calculate Escalera probability
-    pass
+    # Count missing numbers for both possible straights
+    missing_1 = len(straight_1 - current_dice)  # Gaps for [1, 2, 3, 4, 5]
+    missing_2 = len(straight_2 - current_dice)  # Gaps for [2, 3, 4, 5, 6]
+    gaps = min(missing_1, missing_2)  # Minimum gaps for a valid Escalera
+
+    # Handle cases based on rolls_remaining
+    if rolls_remaining == 1:
+        # Case 1: One roll remaining
+        return (1/6) ** gaps
+    elif rolls_remaining == 2:
+        # Case 2: Two rolls remaining
+        total_probability = 0
+
+        # Loop through possible outcomes of the first re-roll
+        for first_roll_matches in range(gaps + 1):  # 0 to gaps
+            # Probability of achieving `first_roll_matches` in the first re-roll
+            prob_first_roll = calculate_binomial_probability(gaps, first_roll_matches)
+            # Remaining gaps after the first re-roll
+            gaps_left = gaps - first_roll_matches
+            # Probability of completing Escalera in the second roll
+            prob_second_roll = (1/6) ** gaps_left
+            # Combine probabilities for this outcome
+            total_probability += prob_first_roll * prob_second_roll
+
+        return total_probability
 
 def calculate_binomial_probability(n, k):
     """
@@ -149,7 +183,7 @@ def calculate_all_probabilities(dice, rolls_remaining):
     probabilities = {
         "Generala": calculate_generala_probability(dice, rolls_remaining),
         "Pócker": calculate_poker_probability(dice, rolls_remaining),
-        "Full": calculate_full_probability(dice, rolls_remaining)
-        # "Escalera": calculate_escalera_probability(dice)
+        "Full": calculate_full_probability(dice, rolls_remaining),
+        "Escalera": calculate_escalera_probability(dice, rolls_remaining)
     }
     return probabilities
