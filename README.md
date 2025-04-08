@@ -1,7 +1,7 @@
 # Generala
 
 ## About This Project ℹ️
-This repository contains a Python-based implementation to simulate and calculate the probabilities of achieving combinations in the classic dice game **Generala**. The code allows players and developers to analyze their chances of completing specific combinations over multiple dice rolls and optimize their strategies. The project is designed to be modular, educational, and user-friendly, making it ideal for gaming enthusiasts or probability learners.
+This repository contains a Python-based implementation to simulate the classic dice game **Generala** and calculate the probabilities of achieving combinations. The code allows players and developers to analyze their chances of completing specific combinations over multiple dice rolls and optimize their strategies. The project is designed to be modular, educational, and user-friendly, making it ideal for gaming enthusiasts or probability learners.
 
 ## Rules of Generala 🎲
 
@@ -21,8 +21,8 @@ Achieve one of the predefined combinations with 5 dice and score the most points
    - **Escalera (20 points):** A straight sequence (e.g., `[1, 2, 3, 4, 5]` or `[2, 3, 4, 5, 6]`).
    - **Number Scoring:** Sum of a chosen number from your dice. Example: `[2, 4, 5, 5, 6]` → Scoring **5s** gives **10 points** (2 × 5).
 5. **Bonus Rule:** If you achieve a combination after your **first throw**, score an **extra 5 points**.
-6. **End Of The Turn:** After their last roll, each player need to match their outcome to one valid combination. If there is no valid combination for their set of dice they need to cross out one combination of their choice in their scoring board and they get **0 points** for that turn. 
-7. **End Of The Game:** The game finishes after 11 turns. Then the one with the highest score wins.
+6. **End Of The Turn:** After your last roll, you need to match your outcome to one valid combination. If there is no valid combination left for your set of dice, you need to cross out one combination of your choice from your scoring board and you get **0 points** for this turn. 
+7. **End Of The Game:** The game finishes after 11 turns. The player with the highest score wins.
 
 ## How to Contribute 🤝
 Contributions are welcome! If you'd like to improve the code, add features, or fix bugs, please follow these steps:
