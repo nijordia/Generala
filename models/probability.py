@@ -90,6 +90,8 @@ def calculate_full_probability(dice, rolls_remaining):
         remaining_dice = 1 # Need one die to for a pair
     elif max_matches == 3:
         remaining_dice = 2 - second_max_matches  # Need to complete the pair
+    elif max_matches == 2 and second_max_matches == 2:
+        remaining_dice = 1 # Need one die to complete the three-of-a-kind
     elif max_matches == 2:
         remaining_dice = 3  # Need to complete three-of-a-kind and pair
     else:
@@ -101,6 +103,8 @@ def calculate_full_probability(dice, rolls_remaining):
         if max_matches == 3 and second_max_matches == 2:
             # Already a Full House
             return 1.0
+        if max_matches == 2 and second_max_matches == 2:
+            return 2/6  # Probability of rolling one of the two needed numbers
         # Probability formula for one roll: (1/6)^remaining_dice
         return (1/6) ** remaining_dice
     elif rolls_remaining == 2:
