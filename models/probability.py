@@ -86,7 +86,9 @@ def calculate_full_probability(dice, rolls_remaining):
     second_max_matches = sorted_counts[1]  # Number of dice in the second-largest group
 
     # Remaining dice to match
-    if max_matches == 3:
+    if max_matches == 4:
+        remaining_dice = 1 # Need one die to for a pair
+    elif max_matches == 3:
         remaining_dice = 2 - second_max_matches  # Need to complete the pair
     elif max_matches == 2:
         remaining_dice = 3  # Need to complete three-of-a-kind and pair
