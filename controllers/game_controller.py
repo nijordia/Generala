@@ -3,6 +3,7 @@ from models.dice import DiceSet
 from models.game_state import Scoreboard
 from models.probability import calculate_all_probabilities
 from models.score import calculate_score
+from controllers.probability_controller import ProbabilityController
 
 class GameController:
     """
@@ -22,6 +23,7 @@ class GameController:
         self.current_player_idx = 0
         self.current_round = 1
         self.max_rounds = 11 # 11 combinations to play
+        self.probability_controller = ProbabilityController()
 
     def get_current_player(self):
         """
@@ -52,7 +54,7 @@ class GameController:
         if None in dice_values or rolls_remaining < 1:
             return {}
         
-        return calculate_all_probabilities(dice_values, rolls_remaining)
+        return self.probability_controller.calculate_probabilities(dice_values, rolls_remaining)
     
     def score_combination(self, combination):
         """
@@ -113,6 +115,19 @@ class GameController:
         :return: Dictionary mapping player names to their scores.
         """
         return {player: self.scoreboards[player].get_total_score() for player in self.players}
+    
+    def get_best_combination(self):
+        """
+        Get the combination with the highest probability based on current dice.
+        :return: Tuple of (combination, probability) or None
+        """
+        dice_values = self.dice_set.get_values()
+        rolls_remaining = self.dice_set.max_throws - self.dice_set.throw_count
+        
+        if None in dice_values or rolls_remaining < 1:
+            return None
+            
+        return self.probability_controller.get_best_combination(dice_values, rolls_remaining)       
     
     def get_winner(self):
         """"
