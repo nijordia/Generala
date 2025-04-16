@@ -85,11 +85,11 @@ def calculate_full_probability(dice, rolls_remaining):
     max_matches = sorted_counts[0]  # Number of dice in the largest group
     second_max_matches = sorted_counts[1]  # Number of dice in the second-largest group
 
-    # Remaining dice to match
+    # Remaining dice to match: This section determines how many dices you need to change to achieve full house.
     if max_matches == 4:
-        remaining_dice = 1 # Need one die to for a pair
+        remaining_dice = 1 # Need one die to form a pair
     elif max_matches == 3:
-        remaining_dice = 2 - second_max_matches  # Need to complete the pair
+        remaining_dice = 2 - second_max_matches  
     elif max_matches == 2 and second_max_matches == 2:
         remaining_dice = 1 # Need one die to complete the three-of-a-kind
     elif max_matches == 2:
